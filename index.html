@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tinu Pandian - Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  /* Enhanced Apple-inspired minimal style */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  :root {
+    --primary: #0071e3;
+    --primary-dark: #0056b3;
+    --secondary: #6e6e73;
+    --background: #f5f5f7;
+    --surface: #ffffff;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --border: #d2d2d7;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.12);
+    --gradient: linear-gradient(135deg, #0071e3 0%, #5ac8fa 100%);
+    --radius: 16px;
+    --radius-small: 8px;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  /* Header */
+  header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem 2rem;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+  }
+  
+  nav {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+  }
+  
+  nav a:hover {
+    color: var(--primary);
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+  
+  /* Main Content */
+  main {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  
+  section {
+    margin-bottom: 5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  
+  section.visible {
+    opacity: 1;
+    transform: none;
+  }
+  
+  /* Section Headers */
+  h2 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+  }
+  
+  h2::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gradient);
+    border-radius: 2px;
+  }
+  
+  h3 {
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Cards */
+  .project-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--shadow);
+    margin-top: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px var(--shadow-hover);
+    border-color: rgba(0, 113, 227, 0.1);
+  }
+  
+  .project-card:hover::before {
+    opacity: 1;
+  }
+  
+  .project-card em {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 1rem;
+    font-style: normal;
+    font-weight: 500;
+  }
+  
+  /* Lists */
+  ul {
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  li::marker {
+    color: var(--primary);
+  }
+  
+  /* Skills Section */
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+  
+  .skills-category {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .skills-category p {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-top: 0.5rem;
+  }
+  
+  /* Contact Section */
+  .contact-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  
+  .profile-image {
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .profile-image img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 12px 30px rgba(0, 113, 227, 0.2);
+    border: 4px solid white;
+    transition: all 0.4s ease;
+  }
+  
+  .profile-image:hover img {
+    transform: scale(1.05);
+    box-shadow: 0 16px 40px rgba(0, 113, 227, 0.3);
+  }
+  
+  .contact-info {
+    flex-grow: 1;
+    min-width: 300px;
+  }
+  
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-details p {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+  }
+  
+  .contact-details i {
+    width: 20px;
+    color: var(--primary);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--surface);
+    border-radius: 50%;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: all 0.3s ease;
+  }
+  
+  .social-links a:hover {
+    transform: translateY(-4px);
+    background: var(--gradient);
+    color: white;
+  }
+  
+  .company-logos {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .company-logos img {
+    height: 40px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    filter: grayscale(20%);
+  }
+  
+  .company-logos img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+  }
+  
+  .footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    nav {
+      gap: 1.5rem;
+    }
+    
+    main {
+      padding: 0 1.5rem;
+      margin: 2rem auto;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    .contact-container {
+      flex-direction: column;
+      text-align: center;
+      gap: 2rem;
+    }
+    
+    .contact-details p {
+      justify-content: center;
+    }
+    
+    .company-logos {
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    
+    .profile-image img {
+      width: 160px;
+      height: 160px;
+    }
+    
+    .skills-container {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    nav {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    nav a {
+      font-size: 0.9rem;
+    }
+    
+    .project-card {
+      padding: 1.5rem;
+    }
+    
+    .company-logos {
+      gap: 1rem;
+    }
+    
+    .company-logos img {
+      height: 35px;
+    }
+  }
+  
+  /* Animation for skills */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  
+  /* Decorative background elements */
+  .bg-blur {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 113, 227, 0.1) 0%, rgba(0, 113, 227, 0) 70%);
+    z-index: -1;
+  }
+  
+  .bg-blur:nth-child(1) {
+    top: 10%;
+    left: -100px;
+  }
+  
+  .bg-blur:nth-child(2) {
+    bottom: 10%;
+    right: -100px;
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- Background elements -->
+<div class="bg-blur"></div>
+<div class="bg-blur"></div>
+
+<header>
+  <div class="header-container">
+    <h1>Tinu Pandian</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="project-card">
+      <p>Product Operations Executive with 1.8 years of experience in EdTech and e-commerce, focusing on workflow automation, user engagement, and data-driven operations at Supernova AI and Pepperfry. Skilled in Python, JavaScript, SQL, and modern web technologies, with a strong ability to build efficient systems and deliver impactful user experiences.</p>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Work Experience</h2>
+
+    <!-- UPDATED: Product Operations Executive -->
+    <div class="project-card">
+  <h3>Product Operations Executive - Supernova AI</h3>
+  <em>Jan 2025 - Present | Bengaluru, India</em>
+  <ul>
+    <li>Executed high-volume WhatsApp campaigns (10,000 Users/day) using Retool, fully automating scheduling and delivery for seamless outreach.</li>
+    <li>Designed interactive, button-based WhatsApp flows that triggered intelligent auto-responses, creating a smoother and scalable learner communication experience.</li>
+    <li>Developed MoEngage notification journeys (WhatsApp + in-app) with strategic timed nudges, improving campaign engagement and effectiveness by nearly 20%.</li>
+    <li>Managed YouTube and influencer operations-publishing content, analysing performance metrics, and reviewing comments-to strengthen brand visibility by 70%.</li>
+    <li>Centralised automation systems and performance tracking, simplifying daily operations and enhancing workflow efficiency and transparency by 40%.</li>
+  </ul>
+</div>
+
+
+    <!-- UPDATED: Teacher Operations Executive -->
+    <div class="project-card">
+  <h3>Teacher Operations Executive - Supernova AI</h3>
+  <em>Jun 2024 - Dec 2024 | Bengaluru, India</em>
+  <ul>
+    <li>Identified learner blockers and coordinated with teachers to enhance session quality and overall learning outcomes.</li>
+    <li>Created reusable message and video flows that guided learners on using the Supernova app and classes, enabling one-click support.</li>
+    <li>Used Supernova’s AI assistant (Claude) to convert weekly performance data into personalised progress reports with actionable insights.</li>
+    <li>Delivered clear charts and reports to learners and internal teams, enabling targeted interventions that boosted retention by 25% and satisfaction by 80%.</li>
+  </ul>
+</div>
+
+
+    <div class="project-card">
+      <h3>Quality & Warranty Executive - Pepperfry.com</h3>
+      <em>Jun 2023 - Aug 2023 | Vellore, India</em>
+      <ul>
+        <li>Created certification and warranty documents ensuring compliance and accuracy.</li>
+        <li>Increased showroom revenue by 40% through process optimization.</li>
+        <li>Managed festival and seasonal offer campaigns, coordinating promotions and delivering tailored deals to customers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <div class="skills-category">
+        <h3>Technical Skills</h3>
+        <p>Python, Java, JavaScript, TypeScript, HTML, CSS, SQL, PHP, ReactJS, Angular, Flask, AWS (EC2, S3)</p>
+      </div>
+      <div class="skills-category">
+        <h3>Professional Skills</h3>
+        <p>Workflow Automation, Data Analysis, Report Validation, Systems Thinking, Data Visualization, Project Management</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Oil Selling E-Commerce Website</h3>
+      <p>Full-stack B2C platform using HTML, CSS, JavaScript, PHP, and SQL with product listing, shopping cart, and payment integration. Implemented responsive design and secure payment gateway.</p>
+    </div>
+    <div class="project-card">
+      <h3>Face Detection for Autism</h3>
+      <p>CNN-based model to classify autistic/non-autistic faces using Python and deep learning (VGG16). Achieved 92% accuracy in facial pattern recognition for early autism detection.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-container">
+      <div class="profile-image">
+        <img src="Me2.JPG" alt="Tinu Pandian" />
+      </div>
+      
+      <div class="contact-info">
+        <div class="contact-details">
+          <p><i class="fas fa-envelope"></i> tinupandian@gmail.com</p>
+          <p><i class="fas fa-phone"></i> +91 95666 56464</p>
+          <p><i class="fas fa-map-marker-alt"></i> Bengaluru, India</p>
+        </div>
+        
+        <div class="social-links">
+          <a href="https://github.com/Tinupandian" target="_blank" rel="noopener" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/tinu-pandian" target="_blank" rel="noopener" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="mailto:tinupandian@gmail.com" title="Email">
+            <i class="fas fa-paper-plane"></i>
+          </a>
+        </div>
+        
+        <div class="company-logos">
+  <a href="https://app.gosupernova.live/home" target="_blank" rel="noopener" title="Supernova App">
+    <img src="next.png" alt="Supernova AI" />
+  </a>
+
+  <a href="https://www.pepperfry.com/?gad_source=1&gad_campaignid=20727947918&gbraid=0AAAAADxdgCjAdOdjN_KXZxTOdE1wXSKKx&gclid=CjwKCAiA3L_JBhAlEiwAlcWO51gOLexVa1Q79QpVslFo6jNn8i-LA33gvlGmiZ7P2XWvkL1zlFKVjRoCrB0QAvD_BwE" target="_blank" rel="noopener" title="Pepperfry">
+    <img src="Fry.png" alt="Pepperfry" />
+  </a>
+</div>
+ <!-- ⭐ Resume Button (Google Drive) -->
+<div style="margin-top: 2rem;">
+  <a 
+    href="https://drive.google.com/file/d/1E9kOm7NvSsj5EyVWJWWJgKK898uNi7as/view?usp=sharing" 
+    target="_blank"
+    class="resume-btn"
+    style="
+      display:inline-block;
+      padding: 8px 18px;
+      background: var(--gradient);
+      color: white;
+      font-weight:500;
+      border-radius: 12px;
+      text-decoration:none;
+      font-size:1rem;
+      box-shadow:0 6px 20px rgba(0,113,227,0.25);
+      transition:0.3s ease;
+    "
+    onmouseover="this.style.transform='translateY(-3px)'"
+    onmouseout="this.style.transform='translateY(0)'"
+  >
+    <i class="fas fa-file-alt" style="margin-right:8px;"></i>
+    View / Download Resume
+  </a>
+</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p class="footer-main">Simplicity is the ultimate sophistication</p>
+    <div class="footer-divider"></div>
+    <p class="footer-copyright">© 2025 Tinu Pandian • Ready to create something amazing?</p>
+    <div class="footer-links">
+      <a href="#top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i> Back to top
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Enhanced Intersection Observer with delay
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if(entry.isIntersecting) {
+        // Add delay for sequential animation
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 150);
+      }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+
+  document.querySelectorAll('section').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Animate skill items on scroll
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('animate');
+      }
+    });
+  }, {threshold: 0.2});
+
+  document.querySelectorAll('.skills-category, .project-card').forEach(el => {
+    skillObserver.observe(el);
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      window.scrollTo({
+        top: targetSection.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
